@@ -6,7 +6,9 @@ namespace :jekyll do
   task :build => [:set_rails_env] do
     on roles(:web) do
       within release_path do
-        execute :jekyll, 'build'
+        with rails_env: fetch(:rails_env) do
+          execute :jekyll, 'build'
+        end
       end
     end
   end
@@ -15,7 +17,9 @@ namespace :jekyll do
   task :doctor => [:set_rails_env] do
     on roles(:web) do
       within release_path do
-        execute :jekyll, 'doctor'
+        with rails_env: fetch(:rails_env) do
+          execute :jekyll, 'doctor'
+        end
       end
     end
   end
